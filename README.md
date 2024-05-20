@@ -429,6 +429,7 @@ POST /cloud/order
 | `OFFER_UUID` | `string` | **Required**. Offer UUID |
 | `SYSTEM_UUID` | `string` | **Required**. System UUID |
 | `ipv6_enabled` | `boolean` | **Required**. 1 enable and addign a IPv6, 0 disable IPv6 and no IPv6 assignation |
+| `ipv6_block_size` | `integer` | 128 for one IPv6, 64 for a block |
 | `hostname` | `string` | A custom hostname |
 
 
@@ -448,3 +449,122 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 }
 ```
 
+## Display Offers
+
+```http
+GET /cloud/offers
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `API_KEY` | `string` | **Required**. Your API key |
+
+### Example
+
+#### Request
+
+```bash
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/offers'
+```
+#### Result
+
+```json
+{
+   "success":true,
+   "offers":[
+      {
+         "uuid":"vcs-2-intel.par01fr",
+         "category":"vcs",
+         "name":"vCS-2",
+         "price_month":"12.00",
+         "price_hour":"0.0167",
+         "additional_root_space_price_month":"1.80",
+         "additional_root_space_price_hour":"0.00000070",
+         "vcpus":"1",
+         "cpu_family":"intel-xeon",
+         "memory_size":"2048",
+         "root_space":"40",
+         "root_disk_type":"ssd",
+         "bandwidth":"100",
+         "is_windows_included":"0",
+         "additional_ipv4_addresses_max":"4",
+         "additional_ipv4_addresses_price_hour":"0.00347000",
+         "additional_ipv4_addresses_price_month":"2.50",
+         "cloud_zone":{
+            "country_code":"FR",
+            "country_name":"France",
+            "city_name":"Paris",
+            "datacenter_name":"Iliad DC2",
+            "timezone":"Europe\/Paris"
+         }
+      }
+   ]
+}
+```
+
+## Display Systems
+
+```http
+GET /cloud/systems
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `API_KEY` | `string` | **Required**. Your API key |
+
+### Example
+
+#### Request
+
+```bash
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/systems'
+```
+#### Result
+
+```json
+{
+   "success":true,
+   "systems":[
+      {
+         "uuid":"debian-10-64",
+         "name":"Debian 10 (64 bits)",
+         "distribution":"debian",
+         "version":"10",
+         "category":"minimal",
+         "is_windows":"0"
+      },
+      {
+         "uuid":"centos-7-64",
+         "name":"Centos 7 (64 bits)",
+         "distribution":"centos",
+         "version":"7",
+         "category":"minimal",
+         "is_windows":"0"
+      },
+      {
+         "uuid":"archlinux-latest-64",
+         "name":"ArchLinux Latest (64 bits)",
+         "distribution":"archlinux",
+         "version":"0",
+         "category":"minimal",
+         "is_windows":"0"
+      },
+      {
+         "uuid":"win2k19-std-fr-64",
+         "name":"Windows Server 2019 Standard (64 bits)",
+         "distribution":"windows-server-2019",
+         "version":"2019",
+         "category":"windows",
+         "is_windows":"1"
+      },
+      {
+         "uuid":"win2k19-std-en-64",
+         "name":"Windows Server 2019 Standard (64 bits)",
+         "distribution":"windows-server-2019",
+         "version":"2019",
+         "category":"windows",
+         "is_windows":"1"
+      }
+   ]
+}
+```
