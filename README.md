@@ -6,7 +6,7 @@
 
 ## Deploy and manage your cloud from your code.
 
-OpenAPI / Swagger API definition file is available : [swagger.yml](swagger.yml).
+OpenAPI / Swagger API definition file is available : [openapi3_0.yaml](openapi3_0.yaml) [openapi3_0.json](openapi3_0.json).
 
 ## Environment Variables
 
