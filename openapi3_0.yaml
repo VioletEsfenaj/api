@@ -1,7 +1,7 @@
 
 openapi: 3.0.1
 info:
-  title: VirtuaCloud API
+  title: Virtua.Cloud API
   description: "This API allows you to manage and deploy your cloud services from\
     \ [Virtua.cloud](Virtua.cloud) from a rest API."
   termsOfService: https://www.virtua.cloud/legal/terms-of-service
@@ -10,7 +10,7 @@ info:
   version: 1.0.2
 externalDocs:
   description: Website
-  url: https://virtua.cloud
+  url: https://www.virtua.cloud
 servers:
 - url: https://api.virtua.cloud/
 security:
@@ -57,10 +57,27 @@ paths:
           content: {}
       security:
       - ApiKeyAuth: []
+  /project:
+    get:
+      tags:
+      - Project
+      summary: Display account projects
+      operationId: getProjects
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectsResponse'
+        "403":
+          description: Denied
+          content: {}
+      security:
+      - ApiKeyAuth: []
   /cloud-server:
     get:
       tags:
-      - Account
       - Cloud Server
       summary: List all active Cloud Servers on your account
       operationId: getActvCloud
@@ -167,6 +184,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CloudServerAct'
+        "403":
+          description: Denied
+          content: {}
+      security:
+      - ApiKeyAuth: []
+  /cloud-server/{UUID}/password:
+    get:
+      tags:
+      - Cloud Server
+      summary: Get Cloud Server password
+      operationId: getCloudServPassword
+      parameters:
+      - name: UUID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        required: true
+        schema:
+          type: string
+          enum: [root, rescue]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResponse'
         "403":
           description: Denied
           content: {}
@@ -818,7 +865,51 @@ components:
             timezone:
               type: string
               example: Europe/Paris
-
+    ProjectsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    Project:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        cloud_servers_count:
+          type: string
+        monthly_cloud_usage:
+          type: string
+          format: float
+        monthly_cloud_usage_estimate:
+          type: string
+          format: float
+        domains_count:
+          type: string
+        environment:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    PasswordResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        uuid:
+          type: string
+          format: uuid
+        password:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

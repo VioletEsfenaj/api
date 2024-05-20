@@ -1,0 +1,1360 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Virtua.Cloud API",
+    "description": "This API allows you to manage and deploy your cloud services from [Virtua.cloud](Virtua.cloud) from a rest API.",
+    "termsOfService": "https://www.virtua.cloud/legal/terms-of-service",
+    "contact": {
+      "email": "support@virtua.cloud"
+    },
+    "version": "1.0.2"
+  },
+  "externalDocs": {
+    "description": "Website",
+    "url": "https://www.virtua.cloud"
+  },
+  "servers": [
+    {
+      "url": "https://api.virtua.cloud/"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Account",
+      "description": "Account informations"
+    },
+    {
+      "name": "Cloud Server",
+      "description": "Manage and create your Cloud servers"
+    }
+  ],
+  "paths": {
+    "/account": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Display account informations",
+        "operationId": "getAcc",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud/limits": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Display account resources usage and limits",
+        "operationId": "getLim",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Limits"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/project": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Display account projects",
+        "operationId": "getProjects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectsResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server": {
+      "get": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "List all active Cloud Servers on your account",
+        "operationId": "getActvCloud",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServersResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Create a Cloud Server",
+        "operationId": "newCloudServ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "OFFER_UUID",
+                  "PROJECT_UUID",
+                  "SYSTEM_UUID",
+                  "ipv6_enabled"
+                ],
+                "type": "object",
+                "properties": {
+                  "PROJECT_UUID": {
+                    "type": "string",
+                    "description": "Project UUID"
+                  },
+                  "OFFER_UUID": {
+                    "type": "string",
+                    "description": "Offer UUID"
+                  },
+                  "SYSTEM_UUID": {
+                    "type": "string",
+                    "description": "System UUID"
+                  },
+                  "ipv6_enabled": {
+                    "type": "boolean",
+                    "description": "1 enable and addign a IPv6, 0 disable IPv6 and no IPv6 assignation"
+                  },
+                  "ipv6_block_size": {
+                    "type": "integer",
+                    "description": "128 for one IPv6, 64 for a block"
+                  },
+                  "hostname": {
+                    "type": "string",
+                    "description": "A custom hostname"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Create informations"
+      }
+    },
+    "/cloud-server/{UUID}": {
+      "get": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Display a Cloud Server informations",
+        "operationId": "getCloudServInfo",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServer"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Delete a Cloud Server",
+        "operationId": "destroyCloudServ",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServerAct"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server/{UUID}/password": {
+      "get": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Get Cloud Server password",
+        "operationId": "getCloudServPassword",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "root",
+                "rescue"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PasswordResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server/{UUID}/start": {
+      "post": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Start a Cloud Server",
+        "operationId": "startCloudServ",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServerAct"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server/{UUID}/stop": {
+      "post": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Stop a Cloud Server",
+        "operationId": "stopCloudServ",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServerAct"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server/{UUID}/restart": {
+      "post": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Restart a Cloud Server",
+        "operationId": "restartCloudServ",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServerAct"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud-server/{UUID}/resize": {
+      "post": {
+        "tags": [
+          "Cloud Server"
+        ],
+        "summary": "Resize a Cloud Server",
+        "operationId": "resizeCloudServ",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "NEW_OFFER_UUID",
+                  "resize_disk"
+                ],
+                "type": "object",
+                "properties": {
+                  "NEW_OFFER_UUID": {
+                    "type": "string",
+                    "description": "The new offer UUID"
+                  },
+                  "resize_disk": {
+                    "type": "boolean",
+                    "description": "1 upgrade the disk size, 0 keep the disk size unchanged"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloudServerAct"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Resize informations"
+      }
+    },
+    "/cloud/offers": {
+      "get": {
+        "tags": [
+          "Cloud Offers"
+        ],
+        "summary": "Display Offers",
+        "operationId": "getOffers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/cloud/systems": {
+      "get": {
+        "tags": [
+          "Systems"
+        ],
+        "summary": "Get all systems",
+        "operationId": "getSystems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemsResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Denied",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "string",
+            "example": "93.6425"
+          },
+          "currency": {
+            "type": "string",
+            "example": "EUR"
+          },
+          "monthly_cloud_usage": {
+            "type": "string",
+            "example": "6.459"
+          },
+          "monthly_cloud_usage_estimate": {
+            "type": "string",
+            "example": "37.5633"
+          },
+          "timezone": {
+            "type": "string",
+            "example": "Europe\\/Paris"
+          },
+          "today_cloud_usage": {
+            "type": "string",
+            "example": "1.0714"
+          },
+          "cloud_servers_limit": {
+            "type": "string",
+            "example": "8"
+          }
+        }
+      },
+      "Limits": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "cloud_servers": {
+                "type": "integer",
+                "format": "int32",
+                "example": 5
+              },
+              "vcpus": {
+                "type": "string",
+                "example": "10"
+              },
+              "memory_size": {
+                "type": "string",
+                "example": "18944"
+              },
+              "root_space": {
+                "type": "string",
+                "example": "120"
+              },
+              "ip_address_v4": {
+                "type": "string",
+                "example": "5"
+              },
+              "ip_address_v6": {
+                "type": "string",
+                "example": "3"
+              }
+            }
+          },
+          "limits": {
+            "type": "object",
+            "properties": {
+              "cloud_servers": {
+                "type": "string",
+                "example": "8"
+              },
+              "smtp_enabled": {
+                "type": "string",
+                "example": "1"
+              }
+            }
+          }
+        }
+      },
+      "CloudServersResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "cloud_servers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "example": "4768103d-7e0b-46c8-8f65-360bcd7b3322"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "vs4023.par01fr.vsys.cloud"
+                },
+                "label": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "offer": {
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string",
+                      "example": "vcs-2-win-ryzen"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "vcs-win"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "vCS-2-WIN"
+                    },
+                    "price_month": {
+                      "type": "string",
+                      "example": "12.0"
+                    },
+                    "price_hour": {
+                      "type": "string",
+                      "example": "0.0164"
+                    }
+                  }
+                },
+                "start_time": {
+                  "type": "string",
+                  "example": "2020-02-10T13:53:53.000Z"
+                },
+                "end_time": {
+                  "type": "string",
+                  "example": "2020-02-10T22:05:01.000Z"
+                },
+                "monthly_usage": {
+                  "type": "string",
+                  "example": "0.13424311111108"
+                },
+                "short_description": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "is_suspended": {
+                  "type": "string",
+                  "example": "0"
+                },
+                "suspension_reason": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "cloud_zone": {
+                  "type": "object",
+                  "properties": {
+                    "country_code": {
+                      "type": "string",
+                      "example": "FR"
+                    },
+                    "country_name": {
+                      "type": "string",
+                      "example": "France"
+                    },
+                    "city_name": {
+                      "type": "string",
+                      "example": "Paris"
+                    },
+                    "datacenter_name": {
+                      "type": "string",
+                      "example": "Iliad DC2"
+                    },
+                    "timezone": {
+                      "type": "string",
+                      "example": "Europe/Paris"
+                    }
+                  }
+                },
+                "vcpus": {
+                  "type": "string",
+                  "example": "2"
+                },
+                "vcpus_used": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "memory_size": {
+                  "type": "string",
+                  "example": "4096"
+                },
+                "memory_size_used": {
+                  "type": "string",
+                  "example": "3597"
+                },
+                "root_space": {
+                  "type": "string",
+                  "example": "40"
+                },
+                "root_disk_type": {
+                  "type": "string",
+                  "example": "nvme"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "running"
+                },
+                "is_error": {
+                  "type": "string",
+                  "example": "0"
+                },
+                "is_setup": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "system": {
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string",
+                      "example": "win2k19-std-fr-64"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Windows Server 2019 Standard (64 bits)"
+                    }
+                  }
+                },
+                "uptime": {
+                  "type": "string",
+                  "example": "14624"
+                },
+                "vm_type": {
+                  "type": "string",
+                  "example": "qemu"
+                },
+                "setup_step": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "netboot_on": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "netboot_is_setup": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "is_smtp_allowed": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "hostname": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "is_setup_at": {
+                  "type": "string",
+                  "example": "2020-02-10T13:53:53.000Z"
+                },
+                "is_ipv6_enabled": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "is_processing": {
+                  "type": "string",
+                  "example": "0"
+                },
+                "ssh_keys": {
+                  "type": "string",
+                  "format": "nullable"
+                },
+                "keyboard": {
+                  "type": "string",
+                  "example": "fr"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CloudServer": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "4768103d-7e0b-46c8-8f65-360bcd7b3322"
+          },
+          "name": {
+            "type": "string",
+            "example": "vs4023.par01fr.vsys.cloud"
+          },
+          "label": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "offer": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "example": "vcs-2-win-ryzen"
+              },
+              "category": {
+                "type": "string",
+                "example": "vcs-win"
+              },
+              "name": {
+                "type": "string",
+                "example": "vCS-2-WIN"
+              },
+              "price_month": {
+                "type": "string",
+                "example": "12.0"
+              },
+              "price_hour": {
+                "type": "string",
+                "example": "0.0164"
+              }
+            }
+          },
+          "start_time": {
+            "type": "string",
+            "example": "2020-02-10T13:53:53.000Z"
+          },
+          "end_time": {
+            "type": "string",
+            "example": "2020-02-10T22:05:01.000Z"
+          },
+          "monthly_usage": {
+            "type": "string",
+            "example": "0.13424311111108"
+          },
+          "short_description": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "is_suspended": {
+            "type": "string",
+            "example": "0"
+          },
+          "suspension_reason": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "cloud_zone": {
+            "type": "object",
+            "properties": {
+              "country_code": {
+                "type": "string",
+                "example": "FR"
+              },
+              "country_name": {
+                "type": "string",
+                "example": "France"
+              },
+              "city_name": {
+                "type": "string",
+                "example": "Paris"
+              },
+              "datacenter_name": {
+                "type": "string",
+                "example": "Iliad DC2"
+              },
+              "timezone": {
+                "type": "string",
+                "example": "Europe/Paris"
+              }
+            }
+          },
+          "vcpus": {
+            "type": "string",
+            "example": "2"
+          },
+          "vcpus_used": {
+            "type": "string",
+            "example": "1"
+          },
+          "memory_size": {
+            "type": "string",
+            "example": "4096"
+          },
+          "memory_size_used": {
+            "type": "string",
+            "example": "3597"
+          },
+          "root_space": {
+            "type": "string",
+            "example": "40"
+          },
+          "root_disk_type": {
+            "type": "string",
+            "example": "nvme"
+          },
+          "status": {
+            "type": "string",
+            "example": "running"
+          },
+          "is_error": {
+            "type": "string",
+            "example": "0"
+          },
+          "is_setup": {
+            "type": "string",
+            "example": "1"
+          },
+          "system": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "example": "win2k19-std-fr-64"
+              },
+              "name": {
+                "type": "string",
+                "example": "Windows Server 2019 Standard (64 bits)"
+              }
+            }
+          },
+          "uptime": {
+            "type": "string",
+            "example": "14624"
+          },
+          "vm_type": {
+            "type": "string",
+            "example": "qemu"
+          },
+          "setup_step": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "netboot_on": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "netboot_is_setup": {
+            "type": "string",
+            "example": "1"
+          },
+          "is_smtp_allowed": {
+            "type": "string",
+            "example": "1"
+          },
+          "hostname": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "is_setup_at": {
+            "type": "string",
+            "example": "2020-02-10T13:53:53.000Z"
+          },
+          "is_ipv6_enabled": {
+            "type": "string",
+            "example": "1"
+          },
+          "is_processing": {
+            "type": "string",
+            "example": "0"
+          },
+          "ssh_keys": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "keyboard": {
+            "type": "string",
+            "example": "fr"
+          }
+        }
+      },
+      "CloudServerAct": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "UUID"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "example": "{ACTION} in progress..."
+                },
+                "type": {
+                  "type": "string",
+                  "example": "notice"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "UUID"
+          }
+        }
+      },
+      "SystemsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "systems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/System"
+            }
+          }
+        }
+      },
+      "System": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Unique identifier for the system.",
+            "example": "debian-10-64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the system.",
+            "example": "Debian 10 (64 bits)"
+          },
+          "distribution": {
+            "type": "string",
+            "description": "Distribution type of the system.",
+            "example": "debian"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the system.",
+            "example": 10
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the system.",
+            "example": "minimal"
+          },
+          "is_windows": {
+            "type": "string",
+            "description": "Indicates if the system is a Windows OS.",
+            "example": "0"
+          }
+        }
+      },
+      "OffersResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Offer"
+            }
+          }
+        }
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "example": "vcs-2-intel.par01fr"
+          },
+          "category": {
+            "type": "string",
+            "example": "vcs"
+          },
+          "name": {
+            "type": "string",
+            "example": "vCS-2"
+          },
+          "price_month": {
+            "type": "string",
+            "example": "12.00"
+          },
+          "price_hour": {
+            "type": "string",
+            "example": "0.0167"
+          },
+          "additional_root_space_price_month": {
+            "type": "string",
+            "example": "1.80"
+          },
+          "additional_root_space_price_hour": {
+            "type": "string",
+            "example": "0.00000070"
+          },
+          "vcpus": {
+            "type": "string",
+            "example": "1"
+          },
+          "cpu_family": {
+            "type": "string",
+            "example": "intel-xeon"
+          },
+          "memory_size": {
+            "type": "string",
+            "example": "2048"
+          },
+          "root_space": {
+            "type": "string",
+            "example": "40"
+          },
+          "root_disk_type": {
+            "type": "string",
+            "example": "ssd"
+          },
+          "bandwidth": {
+            "type": "string",
+            "example": "100"
+          },
+          "is_windows_included": {
+            "type": "string",
+            "example": "0"
+          },
+          "additional_ipv4_addresses_max": {
+            "type": "string",
+            "example": "4"
+          },
+          "additional_ipv4_addresses_price_hour": {
+            "type": "string",
+            "example": "0.00347000"
+          },
+          "additional_ipv4_addresses_price_month": {
+            "type": "string",
+            "example": "2.50"
+          },
+          "cloud_zone": {
+            "type": "object",
+            "properties": {
+              "country_code": {
+                "type": "string",
+                "example": "FR"
+              },
+              "country_name": {
+                "type": "string",
+                "example": "France"
+              },
+              "city_name": {
+                "type": "string",
+                "example": "Paris"
+              },
+              "datacenter_name": {
+                "type": "string",
+                "example": "Iliad DC2"
+              },
+              "timezone": {
+                "type": "string",
+                "example": "Europe/Paris"
+              }
+            }
+          }
+        }
+      },
+      "ProjectsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            }
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "cloud_servers_count": {
+            "type": "string"
+          },
+          "monthly_cloud_usage": {
+            "type": "string",
+            "format": "float"
+          },
+          "monthly_cloud_usage_estimate": {
+            "type": "string",
+            "format": "float"
+          },
+          "domains_count": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PasswordResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "description": "Your VirtuaCloud API Key (Required).",
+        "name": "X-API-Key",
+        "in": "header"
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}
