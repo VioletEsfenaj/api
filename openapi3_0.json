@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://api.virtua.cloud/"
+      "url": "https://api.virtua.cloud/v1/"
     }
   ],
   "security": [

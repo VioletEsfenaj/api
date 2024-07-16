@@ -37,7 +37,7 @@ GET /account
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/account'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/account'
 ```
 #### Result
 
@@ -68,7 +68,7 @@ GET /cloud/limits
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/limits'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud/limits'
 ```
 #### Result
 
@@ -107,7 +107,7 @@ GET /cloud-server
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server'
 ```
 #### Result
 
@@ -188,7 +188,7 @@ GET /cloud-server/UUID
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID'
 ```
 #### Result
 
@@ -265,7 +265,7 @@ POST /cloud-server/UUID/start
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID/start'
+curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID/start'
 ```
 #### Result
 
@@ -298,7 +298,7 @@ POST /cloud-server/UUID/stop
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID/stop'
+curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID/stop'
 ```
 #### Result
 
@@ -331,7 +331,7 @@ POST /cloud-server/UUID/restart
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID/restart'
+curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID/restart'
 ```
 #### Result
 
@@ -366,7 +366,7 @@ POST /cloud-server/UUID/resize
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID/resize' --data 'offer=NEW_OFFER_UUID' -d 'resize_disk=1'
+curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID/resize' --data 'offer=NEW_OFFER_UUID' -d 'resize_disk=1'
 ```
 #### Result
 
@@ -399,7 +399,7 @@ DELETE /cloud-server/UUID
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request DELETE -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud-server/UUID'
+curl -s --header 'Content-Type: application/json' --request DELETE -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud-server/UUID'
 ```
 #### Result
 
@@ -438,7 +438,7 @@ POST /cloud/order
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/order' --data 'offer=OFFER_UUID' -d 'system=SYSTEM_UUID' -d 'ipv6_enable=0' -d 'hostname=my.server.cloud' -d 'project=PROJECT_UUID'
+curl -s --header 'Content-Type: application/json' --request POST -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud/order' --data 'offer=OFFER_UUID' -d 'system=SYSTEM_UUID' -d 'ipv6_enable=0' -d 'hostname=my.server.cloud' -d 'project=PROJECT_UUID'
 ```
 #### Result
 
@@ -464,7 +464,7 @@ GET /cloud/offers
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/offers'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud/offers'
 ```
 #### Result
 
@@ -517,7 +517,7 @@ GET /cloud/systems
 #### Request
 
 ```bash
-curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/cloud/systems'
+curl -s --header 'Content-Type: application/json' --request GET -H 'Authorization: Basic API_KEY' 'https://api.virtua.cloud/v1/cloud/systems'
 ```
 #### Result
 

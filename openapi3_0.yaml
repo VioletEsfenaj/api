@@ -12,7 +12,7 @@ externalDocs:
   description: Website
   url: https://www.virtua.cloud
 servers:
-- url: https://api.virtua.cloud/
+- url: https://api.virtua.cloud/v1/
 security:
 - ApiKeyAuth: []
 tags:
