@@ -25,7 +25,7 @@ For support, email hello@virtua.cloud.
 ## Display account informations
 
 ```http
-GET /account
+GET /v1/account
 ```
 
 | Parameter | Type     | Description                |
@@ -56,7 +56,7 @@ curl -s --header 'Content-Type: application/json' --request GET -H 'Authorizatio
 ## Display resources usage and limits
 
 ```http
-GET /cloud/limits
+GET /v1/cloud/limits
 ```
 
 | Parameter | Type     | Description                |
@@ -95,7 +95,7 @@ curl -s --header 'Content-Type: application/json' --request GET -H 'Authorizatio
 ## List all active Cloud Servers
 
 ```http
-GET /cloud-server
+GET /v1/cloud-server
 ```
 
 | Parameter | Type     | Description                |
@@ -175,7 +175,7 @@ curl -s --header 'Content-Type: application/json' --request GET -H 'Authorizatio
 ## Display a Cloud Server informations
 
 ```http
-GET /cloud-server/UUID
+GET /v1/cloud-server/UUID
 ```
 
 | Parameter | Type     | Description                |
@@ -252,7 +252,7 @@ curl -s --header 'Content-Type: application/json' --request GET -H 'Authorizatio
 ## Start a Cloud Server
 
 ```http
-POST /cloud-server/UUID/start
+POST /v1/cloud-server/UUID/start
 ```
 
 | Parameter | Type     | Description                |
@@ -285,7 +285,7 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 ## Stop a Cloud Server
 
 ```http
-POST /cloud-server/UUID/stop
+POST /v1/cloud-server/UUID/stop
 ```
 
 | Parameter | Type     | Description                |
@@ -318,7 +318,7 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 ## Restart a Cloud Server
 
 ```http
-POST /cloud-server/UUID/restart
+POST /v1/cloud-server/UUID/restart
 ```
 
 | Parameter | Type     | Description                |
@@ -351,7 +351,7 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 ## Resize a Cloud Server
 
 ```http
-POST /cloud-server/UUID/resize
+POST /v1/cloud-server/UUID/resize
 ```
 
 | Parameter | Type     | Description                |
@@ -386,7 +386,7 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 ## Destroy a Cloud Server
 
 ```http
-DELETE /cloud-server/UUID
+DELETE /v1/cloud-server/UUID
 ```
 
 | Parameter | Type     | Description                |
@@ -419,7 +419,7 @@ curl -s --header 'Content-Type: application/json' --request DELETE -H 'Authoriza
 ## Deploy a new Cloud Server
 
 ```http
-POST /cloud/order
+POST /v1/cloud/order
 ```
 
 | Parameter | Type     | Description                |
@@ -452,7 +452,7 @@ curl -s --header 'Content-Type: application/json' --request POST -H 'Authorizati
 ## Display Offers
 
 ```http
-GET /cloud/offers
+GET /v1/cloud/offers
 ```
 
 | Parameter | Type     | Description                |
@@ -505,7 +505,7 @@ curl -s --header 'Content-Type: application/json' --request GET -H 'Authorizatio
 ## Display Systems
 
 ```http
-GET /cloud/systems
+GET /v1/cloud/systems
 ```
 
 | Parameter | Type     | Description                |
